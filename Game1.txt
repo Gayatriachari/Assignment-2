@@ -1,0 +1,113 @@
+package in.ineuron.main;
+
+import java.util.Scanner;
+
+class Guesser{
+	int guessNum;
+	public int guessNumber() {
+		Scanner scan=new Scanner(System.in); 
+		System.out.println("Guesser kindly guess the num");  
+		guessNum=scan.nextInt(); 
+			return guessNum; 			
+	}
+}
+class Player{
+	int playerGusnum;
+	public int playerGusnum(){
+		Scanner scan=new Scanner(System.in);
+		System.out.println("Player guess the number");
+		playerGusnum=scan.nextInt(); 
+		return playerGusnum;
+		
+	}
+} 
+class Umpire{
+	int numfromGuesser,numfromPlayer1,numfromPlayer2,numfromPlayer3;  
+	public void collecNumfromGuesser(){
+		Guesser g=new Guesser(); 
+		numfromGuesser=g.guessNumber(); 
+	}
+	public void collecNumfromPlayer(){ 
+		
+		if(numfromGuesser>=0 && numfromGuesser<=15) {
+		   Player p1=new Player();
+		   Player p2=new Player();
+		   Player p3=new Player(); 
+		   numfromPlayer1=p1.playerGusnum();
+		   numfromPlayer2=p2.playerGusnum();
+		   numfromPlayer3=p3.playerGusnum();
+			/*Player []p=new Player[3]; 
+			int []numfromPlayer=new int[3];
+			for(int i=0;i<p.length;i++) { 
+				p[i]=new Player();
+				numfromPlayer[i]=p[i].playerGusnum();
+			}*/
+		}
+	}
+	public void compare() { 
+		if(numfromGuesser>=0 && numfromGuesser<=15) {  
+		     if(numfromGuesser==numfromPlayer1) 
+		     {   
+			    if(numfromGuesser==numfromPlayer2 && numfromGuesser==numfromPlayer3)
+				  System.out.println("Game Tied, all guessed the correct number ");
+			    else if(numfromGuesser==numfromPlayer2 && numfromGuesser!=numfromPlayer3) {
+				  System.out.println("p1 and p2 won the game");  
+			      System.out.println("p3, You lossed the game, with "
+			      		+ (numfromPlayer3-numfromGuesser)+" difference");
+			    }
+			    else if(numfromGuesser!=numfromPlayer2 && numfromGuesser==numfromPlayer3) {
+				  System.out.println("p1 and p3 won the game");
+				  System.out.println("p2, You lossed the game,with "
+				  		+ (numfromPlayer2-numfromGuesser)+" difference");
+			    }
+			    else {
+			     System.out.println("p1 won the game");
+			     System.out.println("p2,p3 both lossed by" +" "
+			    		 +(numfromPlayer2-numfromGuesser)+" "
+			    		 +(numfromPlayer3-numfromGuesser)+" "+"differences respectivilly");
+			    }
+		     }
+		     else if(numfromGuesser==numfromPlayer2) {
+			      if(numfromGuesser==numfromPlayer3) {
+				     System.out.println("p2 and p3 won the game");
+				     System.out.println("p1, You lossed the game by"+" "
+							  +(numfromPlayer1-numfromGuesser)+"difference");
+			      }
+			      else {
+			         System.out.println("p2 won the game");
+			         System.out.println("p1,p3 both lossed by" +" "
+				    		 +(numfromPlayer1-numfromGuesser)+" "
+				    		 +(numfromPlayer3-numfromGuesser)+" "+"deffeences respectivilly");
+			      }
+		    }
+		    else if(numfromGuesser==numfromPlayer3) {
+			    System.out.println("p3 won the game");
+			    System.out.println("p1,p2 both lossed by" +" "
+			    		 +(numfromPlayer1-numfromGuesser)+" "
+			    		 +(numfromPlayer2-numfromGuesser)+" "+"differences respectivilly");
+		    }
+		    else {
+			    System.out.println("All lossed the game, play again");
+			    System.out.println("all lossed the game by" +" "
+			    		 +(numfromPlayer1-numfromGuesser)+" "
+			    		 +(numfromPlayer2-numfromGuesser)+" "
+			    		 +(numfromPlayer3-numfromGuesser)+" "+"differences respectivilly");
+		    }
+	        System.out.println("Dear lossed players notice that, if the difference is "
+	        		+ "-ve then your number is smaller than the correct number "
+	        		+ "else your number is greater than the correct number");
+		}   
+	     else
+	        System.out.println("Guesser,guess the num from 0 to 15, then only players "
+	        		+ "are able to play the game  ");
+    }
+}
+public class Game { 
+	public static void main(String[] args) { 
+         Umpire a=new Umpire(); 
+         a.collecNumfromGuesser();
+         a.collecNumfromPlayer();
+         a.compare(); 
+         
+	}
+}
